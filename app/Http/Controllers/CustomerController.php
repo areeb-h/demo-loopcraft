@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop\Customer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CustomerController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return JsonResponse
+     */
     public function index(Request $request)
     {
         $name = $request->query('name');
@@ -23,7 +30,13 @@ class CustomerController extends Controller
         return response()->json($customers);
     }
 
-    public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -38,6 +51,13 @@ class CustomerController extends Controller
         return response()->json($customer, 201);
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param Customer $customer
+     * @return JsonResponse
+     */
     public function update(Request $request, Customer $customer)
     {
         $validatedData = $request->validate([
@@ -51,6 +71,12 @@ class CustomerController extends Controller
         return response()->json($customer);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Customer $customer
+     * @return JsonResponse
+     */
     public function destroy(Customer $customer)
     {
         $customer->delete();
