@@ -34,12 +34,16 @@ Create an SQLite database. You can also use another database (MySQL, Postgres), 
 
 ```sh
 touch database/database.sqlite
+or
+New-Item -Path .\database\database.sqlite -ItemType File
 ```
 
 Run database migrations:
 
 ```sh
 php artisan migrate
+or
+php artisan migrate:fresh
 ```
 
 Run database seeder:
